@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { Sugar } from 'react-preloaders';
 import { useEffect } from 'react';
-import { GET_MY_FAVORITES_NAMES } from '../utils/query';
+import { GET_MY_FAVORITES_NAMES, GET_MY_FAVORITES } from '../utils/query';
 import Favorites from './Favorites';
 
 const FavoritesContainer = () => {
-  const { loading, error, data } = useQuery(GET_MY_FAVORITES_NAMES);
+  const { loading, error, data, client } = useQuery(GET_MY_FAVORITES_NAMES);
   let [noteFeed, setNotes] = useState([]);
   useEffect(() => {
     document.title = 'Favorites';

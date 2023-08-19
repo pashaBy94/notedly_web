@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import NotePage from './NotePage';
-import { useLazyQuery, useApolloClient, useQuery } from '@apollo/client';
+import { useLazyQuery, useApolloClient, useQuery, useMutation } from '@apollo/client';
 import { Sugar } from 'react-preloaders';
-import { GET_MY, GET_NOTE, IS_LOG } from '../utils/query';
+import { EDIT_NOTE, GET_MY, GET_NOTE, IS_LOG } from '../utils/query';
 
 const NotePageContainer = (props) => {
   let params = useParams();
@@ -12,6 +12,28 @@ const NotePageContainer = (props) => {
   const [local, setLocal] = useState({ data: '', loading: true });
   let id = params.id;
   let [getNote, { loading, error, data }] = useLazyQuery(GET_NOTE);
+  let [editNote, { loading: editsLoading, error: editsError, data: editsData }] = useMutation(EDIT_NOTE, {
+    onCompleted: (data) => {
+      console.log(data.updateNote);
+       client.cache.reset();
+       client.writeQuery({
+       query: IS_LOG,
+       data: {
+         isLog: true,
+       }
+     });
+       client.writeQuery({
+        query: GET_NOTE,
+        data: { note: data.updateNote },
+        variables: {
+          id: data.updateNote.id,
+        },
+      });
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+  });
   useEffect(() => {
     const noteCache = client.readQuery({
       query: GET_NOTE,
@@ -37,6 +59,6 @@ const NotePageContainer = (props) => {
   console.log(isMy);
   if (loading && local.loading) return <Sugar color={'rgb(14 165 233)'} />;
   if (error) return `Error! ${error.message}`;
-  return <NotePage data={data || local.data} isMy={isMy}/>;
+  return <NotePage data={data || local.data} isMy={isMy} editNote={editNote}/>;
 };
 export default NotePageContainer;

@@ -6,7 +6,7 @@ import { Sugar } from 'react-preloaders';
 import Button from '../components/Button';
 import EditNote from '../components/EditNote';
 
-const NotePage = ({ data, isMy }) => {
+const NotePage = ({ data, isMy, editNote }) => {
   const [isEdit, setIsEdit] = useState(false);
   if (!data) return <Sugar color={'rgb(14 165 233)'} />;
   let dateCreate = format(new Date(data.note.createdAt), 'd MMM yyyy');
@@ -34,7 +34,7 @@ const NotePage = ({ data, isMy }) => {
         </div>
       </div>
       <h3 className=" pb-6  text-[20px]">Content:</h3>
-      {isEdit? <EditNote setIsEdit={setIsEdit}/>:<div><div className=" border-2 border-solid rounded-2xl p-4 border-sky-500 relative mb-3">
+      {isEdit? <EditNote editNote={editNote} id={data.note.id} setIsEdit={setIsEdit} content={data.note.content}/>:<div><div className=" border-2 border-solid rounded-2xl p-4 border-sky-500 relative mb-3">
         <div className=' flex justify-between items-center'>
           <span role="img" className="mr-2">
             &#128172;

@@ -5,7 +5,7 @@ import { gql, useMutation, useApolloClient } from '@apollo/client';
 import { Sugar } from 'react-preloaders';
 import { loadErrorMessages, loadDevMessages } from '@apollo/client/dev';
 import { Navigate } from 'react-router-dom';
-import { SIGN_UP } from '../utils/query';
+import { IS_LOG, SIGN_UP } from '../utils/query';
 
 loadDevMessages();
 loadErrorMessages();
@@ -17,11 +17,7 @@ const SignUpContainer = () => {
     onCompleted: (data) => {
       localStorage.setItem('tokenNotedly', data.signUp);
       client.writeQuery({
-        query: gql`
-          query IsLog {
-            isLog
-          }
-        `,
+        query: IS_LOG,
         data: {
           isLog: true,
         },

@@ -17,9 +17,13 @@ query NoteFeed($cursor: String) {
       content
       favoriteCount
       author {
+        id
         username
         avatar
         email
+        favorites{
+          id
+        }
       }
     }
     cursor
@@ -39,6 +43,9 @@ query getNote($id: ID!) {
       id
       username
       avatar
+      favorites{
+        id
+      }
       email
     }
   }
@@ -58,6 +65,9 @@ mutation NewNote($content: String!) {
       username
       avatar
       email
+      favorites{
+        id
+      }
     }
   }
 }
@@ -73,6 +83,14 @@ query {
      id
     }
   }`;
+  export const GET_MY_FAVORITES = gql`
+query {
+  me{
+     favorites{
+      id
+     }
+    }
+  }`;
 
 export const GET_MY_FAVORITES_NAMES = gql`
     query {
@@ -83,9 +101,13 @@ export const GET_MY_FAVORITES_NAMES = gql`
                 content
                 favoriteCount
                 author {
+                  id
                   username
                   avatar
                   email
+                  favorites{
+                    id
+                  }
                 }
               }
             favorites{
@@ -94,10 +116,50 @@ export const GET_MY_FAVORITES_NAMES = gql`
                 content
                 favoriteCount
                 author {
+                  id
                   username
                   avatar
                   email
+                  favorites{
+                    id
+                  }
                 }
               }
           }
         }`;
+
+export const EDIT_NOTE = gql`
+mutation UpdateNote($id: ID!, $content: String!){
+  updateNote(id: $id, content: $content){
+    id
+    createdAt
+    updatedAt
+    content
+    favoriteCount
+    author {
+      id
+      username
+      avatar
+      email
+      favorites{
+        id
+      }
+    }
+  }
+}`;
+export const DELETE_NOTE = gql`
+mutation DeleteNote($id: ID!){
+  deleteNote(id: $id)
+}`;
+export const TOGGLE_FAVORITE = gql`
+mutation ToggleFavorite($id: ID!){
+  toggleFavorite(id: $id){
+    id
+    content
+    favoriteCount
+    author{
+      id
+      username
+    }
+  }
+}`;
