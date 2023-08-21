@@ -5,18 +5,16 @@ import { Sugar } from 'react-preloaders';
 import { loadErrorMessages, loadDevMessages } from '@apollo/client/dev';
 import { Navigate, useNavigate } from 'react-router-dom';
 import NewNote from './NewNote';
-import { GET_NOTE, GET_NOTES, IS_LOG, NEW_NOTE } from '../utils/query';
+import { GET_MY_NOTES, GET_NOTE, GET_NOTES, IS_LOG, NEW_NOTE } from '../utils/query';
 
 loadDevMessages();
 loadErrorMessages();
 const NewNoteContainer = () => {
-  //   const client = useApolloClient();
-  const [errors, setErrors] = useState('');
   const navigate = useNavigate();
 
 
   let [newNote, { loading, error, client }] = useMutation(NEW_NOTE, {
-    // refetchQueries: [{query: GET_NOTES}],
+    refetchQueries: [{query: GET_NOTES}, {query: GET_MY_NOTES}],
     onCompleted:  (data) => {
       client.writeQuery({
         query: GET_NOTE,
@@ -25,13 +23,13 @@ const NewNoteContainer = () => {
           id: data.newNote.id,
         },
       });
-       client.cache.reset();
-       client.writeQuery({
-        query: IS_LOG,
-        data: {
-          isLog: true,
-        }
-      });
+      //  client.cache.reset();
+      //  client.writeQuery({
+      //   query: IS_LOG,
+      //   data: {
+      //     isLog: true,
+      //   }
+      // });
       navigate(`/note/${data.newNote.id}`);
     },
     onError: (err) => {

@@ -36,6 +36,7 @@ const App = () => {
           }`,
         data
     }));
+    
     return (
         <ApolloProvider client={client}>
             <Pages />

@@ -12,7 +12,6 @@ loadErrorMessages();
 const SignUpContainer = () => {
   const client = useApolloClient();
   let [isOk, setOk] = useState(false);
-
   let [signUp, { loading, error }] = useMutation(SIGN_UP, {
     onCompleted: (data) => {
       localStorage.setItem('tokenNotedly', data.signUp);

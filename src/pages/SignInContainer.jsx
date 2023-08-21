@@ -11,7 +11,6 @@ loadDevMessages();
 loadErrorMessages();
 const SignInContainer = () => {
   const client = useApolloClient();
-  const [errors, setErrors] = useState('');
   const navigate = useNavigate();
   let [signIn, { loading, error }] = useMutation(SIGN_IN, {
     onCompleted: (data) => {

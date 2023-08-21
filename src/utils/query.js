@@ -81,9 +81,12 @@ export const GET_MY = gql`
 query {
   me{
      id
+     favorites{
+      id
+     }
     }
   }`;
-  export const GET_MY_FAVORITES = gql`
+export const GET_MY_FAVORITES = gql`
 query {
   me{
      favorites{
@@ -92,7 +95,7 @@ query {
     }
   }`;
 
-export const GET_MY_FAVORITES_NAMES = gql`
+export const GET_MY_NOTES = gql`
     query {
         me{ 
             notes{
@@ -105,11 +108,15 @@ export const GET_MY_FAVORITES_NAMES = gql`
                   username
                   avatar
                   email
-                  favorites{
-                    id
-                  }
                 }
               }
+          }
+        }`;
+
+export const GET_MY_FAVORITES_NOTE = gql`
+    query {
+        me{ 
+          id
             favorites{
                 id
                 createdAt
@@ -127,7 +134,6 @@ export const GET_MY_FAVORITES_NAMES = gql`
               }
           }
         }`;
-
 export const EDIT_NOTE = gql`
 mutation UpdateNote($id: ID!, $content: String!){
   updateNote(id: $id, content: $content){

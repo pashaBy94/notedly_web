@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
-import { DELETE_NOTE, IS_LOG, TOGGLE_FAVORITE } from '../utils/query';
+import { GET_MY_FAVORITES_NOTE, GET_MY_NOTES, IS_LOG, TOGGLE_FAVORITE } from '../utils/query';
 
 const ToggleFavorite = ({ id, count, favoritesMy }) => {
     const [hase, setHase] = useState(false);
@@ -17,15 +17,9 @@ const ToggleFavorite = ({ id, count, favoritesMy }) => {
             else setHase(false);
         }
     })
-  let [toggleFavorite, { client }] = useMutation(TOGGLE_FAVORITE, {
+  let [toggleFavorite, {}] = useMutation(TOGGLE_FAVORITE, {
+    refetchQueries: [{query: GET_MY_FAVORITES_NOTE}, {query: GET_MY_NOTES}],
     onCompleted: (data) => {
-      client.cache.reset();
-      client.writeQuery({
-        query: IS_LOG,
-        data: {
-          isLog: true,
-        },
-      });
     },
     onError: (err) => {
       console.log(err);

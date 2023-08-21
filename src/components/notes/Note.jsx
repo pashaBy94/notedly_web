@@ -7,7 +7,6 @@ import { TOGGLE_FAVORITE } from '../../utils/query';
 import ToggleFavorite from '../ToggleFavorite';
 
 const Note = ({ note, favoritesMy }) => {
-  console.log(favoritesMy);
   let date = format(new Date(note.createdAt), 'd MMM yyyy');
   const [isCann, setIsCann] = useState(false);
   useEffect(() => {

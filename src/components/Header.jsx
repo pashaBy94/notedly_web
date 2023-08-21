@@ -9,26 +9,23 @@ import { GET_MY, IS_LOG } from '../utils/query';
 const Header = memo(() => {
   const navigate = useNavigate();
   const {data, client} = useQuery(IS_LOG);
-  let myId;
-  const [getMy, { data: myData, loading: myLoading, error: myError}] = useLazyQuery(GET_MY);
-  // if(!myLoading){
-  //   myId = myData.me.id;
-  // }
-  useEffect((()=>{
-    getMy();
-  }),[]);
   useEffect(()=>{
     return ()=>{
         localStorage.removeItem('my_id');
     }
 })
-  useEffect((()=>{
-    if(myData)
-    localStorage.setItem('me_id', myData.me.id);
-  }),[myData])
+  // useEffect((()=>{
+  //   if(myData){
+  //     client.writeQuery({
+  //       query: GET_MY,
+  //       data: {...myData},
+  //     });
+  //     localStorage.setItem('me_id', myData.me.id);
+  //   }
+  // }),[myData])
   async function logout(){
     localStorage.removeItem('tokenNotedly');
-    client.cache.reset();
+    client.resetStore();
      client.writeQuery({
       query: IS_LOG,
       data: {

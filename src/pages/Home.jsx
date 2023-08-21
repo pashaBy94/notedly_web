@@ -1,14 +1,13 @@
-import { gql, useApolloClient, useQuery } from '@apollo/client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Button from '../components/Button';
 import NoteFeed from '../components/notes/NoteFeed';
 
-const Home = ({ notes, hasNextPage, getAndPaintNotes, cursor }) => {
+const Home = ({ notes, hasNextPage, refetch, cursor }) => {
   return (
     <div>
       <p>This is the home page!</p>
       <NoteFeed notes={notes}/>
-      {hasNextPage?<Button onClick={()=>getAndPaintNotes(cursor)}>Load more</Button>:null}
+      {hasNextPage?<Button onClick={()=>refetch({cursor})}>Load more</Button>:null}
     </div>
   );
 };

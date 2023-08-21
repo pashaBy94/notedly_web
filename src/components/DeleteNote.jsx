@@ -1,18 +1,10 @@
 import { useMutation } from '@apollo/client';
 import React from 'react';
-import { DELETE_NOTE, IS_LOG } from '../utils/query';
+import { DELETE_NOTE, GET_MY_NOTES, GET_NOTES } from '../utils/query';
 
 const DeleteNote = ({ id }) => {
-  let [deleteNote, { client }] = useMutation(DELETE_NOTE, {
-    onCompleted: (data) => {
-      client.cache.reset();
-      client.writeQuery({
-        query: IS_LOG,
-        data: {
-          isLog: true,
-        },
-      });
-    },
+  let [deleteNote] = useMutation(DELETE_NOTE, {
+    refetchQueries: [{query: GET_NOTES}, {query: GET_MY_NOTES}],
     onError: (err) => {
       console.log(err);
     },
