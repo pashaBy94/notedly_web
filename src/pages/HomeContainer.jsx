@@ -8,7 +8,7 @@ import { GET_NOTES } from '../utils/query';
 const HomeContainer = () => {
   let { loading, error, data, refetch } = useQuery(GET_NOTES);
   useEffect(() => {
-    document.title = 'Home';
+    document.title = 'Homes';
   }, []);
   if (loading) return <Sugar color={'rgb(14 165 233)'} />;
   if (error) return `Error! ${error.message}`;
