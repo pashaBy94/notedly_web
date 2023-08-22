@@ -1,30 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from '../components/Layout';
 import PrivateRoute from '../hoc/PrivateRoute';
-import SignUpContainer from '../components/SignUpContainer';
-import HomeContainer from './HomeContainer';
-import NotePageContainer from './NotePageContainer';
-import SignInContainer from './SignInContainer';
-import NewNoteContainer from './NewNoteContainer';
-import MyNotesContainer from './MyNotesContainer';
-import FavoritesContainer from './FavoritesContainer';
-import { useQuery } from '@apollo/client';
-import { GET_MY, GET_MY_FAVORITES_NOTE } from '../utils/query';
+import SignUpContainer from './SignUp/SignUpContainer';
+import HomeContainer from './Home/HomeContainer';
+import NotePageContainer from './NotePage/NotePageContainer';
+import SignInContainer from './SignIn/SignInContainer';
+import NewNoteContainer from './MyNote/NewNote/NewNoteContainer';
+import MyNotesContainer from './MyNote/MyNotesContainer';
+import FavoritesContainer from './Favorites/FavoritesContainer';
 
 const Pages = () => {
-  const  { data: myData, loading: myLoading, error: myError, client} = useQuery(GET_MY_FAVORITES_NOTE);
-  useEffect((()=>{
-    if(myData){
-      client.writeQuery({
-        query: GET_MY_FAVORITES_NOTE,
-        data: {...myData},
-      });
-      console.log(myData);
-      localStorage.setItem('me_id', myData.me.id);
-    }
-  }),[myData])
-
   return (
       <BrowserRouter>
     <Layout>

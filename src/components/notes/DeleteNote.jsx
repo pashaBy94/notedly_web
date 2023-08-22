@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client';
 import React from 'react';
-import { DELETE_NOTE, GET_MY_NOTES, GET_NOTES } from '../utils/query';
+import { DELETE_NOTE } from '../../utils/mutation';
+import { GET_MY_NOTES, GET_NOTES } from '../../utils/query';
 
 const DeleteNote = ({ id }) => {
   let [deleteNote] = useMutation(DELETE_NOTE, {

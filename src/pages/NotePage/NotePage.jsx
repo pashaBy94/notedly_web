@@ -1,10 +1,9 @@
 import { format } from 'date-fns';
-import { Formik } from 'formik';
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Sugar } from 'react-preloaders';
-import Button from '../components/Button';
-import EditNote from '../components/EditNote';
+import Button from '../../components/general/Button';
+import EditNote from './EditNote';
 
 const NotePage = ({ data, isMy, editNote }) => {
   const [isEdit, setIsEdit] = useState(false);

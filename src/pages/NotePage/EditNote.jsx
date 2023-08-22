@@ -32,7 +32,6 @@ const EditNote = ({ setIsEdit, content, editNote, id }) => {
             id="content"
             onChange={(e) => {
               formik.handleChange(e);
-              console.log(e.target.value);
             }}
             value={formik.values.content}
           ></textarea>

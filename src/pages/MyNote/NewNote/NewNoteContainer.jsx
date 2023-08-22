@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { gql, useApolloClient, useMutation } from '@apollo/client';
-import { Sugar } from 'react-preloaders';
+import React, { useEffect } from 'react';
+import { useMutation } from '@apollo/client';
 import { loadErrorMessages, loadDevMessages } from '@apollo/client/dev';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import NewNote from './NewNote';
-import { GET_MY_NOTES, GET_NOTE, GET_NOTES, IS_LOG, NEW_NOTE } from '../utils/query';
+import { GET_MY_NOTES, GET_NOTE, GET_NOTES } from '../../../utils/query';
+import Preloader from '../../../components/general/Preloader';
+import { NEW_NOTE } from '../../../utils/mutation';
 
 loadDevMessages();
 loadErrorMessages();
@@ -23,13 +23,6 @@ const NewNoteContainer = () => {
           id: data.newNote.id,
         },
       });
-      //  client.cache.reset();
-      //  client.writeQuery({
-      //   query: IS_LOG,
-      //   data: {
-      //     isLog: true,
-      //   }
-      // });
       navigate(`/note/${data.newNote.id}`);
     },
     onError: (err) => {
@@ -39,7 +32,7 @@ const NewNoteContainer = () => {
   useEffect(() => {
     document.title = 'New Note - Notedly';
   }, []);
-  if (loading) return <Sugar color={'rgb(14 165 233)'} />;
+  if (loading) return <Preloader />;
   if (error) console.log(error.message);
   return <NewNote newNote={newNote} />;
 };

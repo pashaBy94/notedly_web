@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import NoteFeed from '../components/notes/NoteFeed';
+import React from 'react';
+import NoteFeed from '../../components/notes/NoteFeed';
 
 const Favorites = ({notes}) => {
   return (

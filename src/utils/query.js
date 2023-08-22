@@ -1,12 +1,8 @@
 import { gql } from "@apollo/client";
-export const SIGN_UP = gql`
-mutation SignUp($username: String!, $email: String!, $password: String!) {
-  signUp(username: $username, email: $email, password: $password)
-}
-`;
+
 export const IS_LOG = gql`
 query IsLog{
-  isLog
+  isLog @client
 }`;
 export const GET_NOTES = gql`
 query NoteFeed($cursor: String) {
@@ -16,14 +12,14 @@ query NoteFeed($cursor: String) {
       createdAt
       content
       favoriteCount
+      favoritedBy{
+        id
+      }
       author {
         id
         username
         avatar
         email
-        favorites{
-          id
-        }
       }
     }
     cursor
@@ -52,46 +48,11 @@ query getNote($id: ID!) {
 }
 `;
 
-export const NEW_NOTE = gql`
-mutation NewNote($content: String!) {
-  newNote(content: $content) {
-    id
-    createdAt
-    updatedAt
-    content
-    favoriteCount
-    author {
-      id
-      username
-      avatar
-      email
-      favorites{
-        id
-      }
-    }
-  }
-}
-`;
-export const SIGN_IN = gql`
-mutation SignIn($username:String! $email:String! $password:String!) {
-  signIn(username: $username, email: $email, password: $password )
-}`;
 
 export const GET_MY = gql`
 query {
   me{
      id
-     favorites{
-      id
-     }
-    }
-  }`;
-export const GET_MY_FAVORITES = gql`
-query {
-  me{
-     favorites{
-      id
-     }
     }
   }`;
 
@@ -103,6 +64,9 @@ export const GET_MY_NOTES = gql`
                 createdAt
                 content
                 favoriteCount
+                favoritedBy{
+                  id
+                }
                 author {
                   id
                   username
@@ -122,50 +86,15 @@ export const GET_MY_FAVORITES_NOTE = gql`
                 createdAt
                 content
                 favoriteCount
+                favoritedBy{
+                  id
+                }
                 author {
                   id
                   username
                   avatar
                   email
-                  favorites{
-                    id
-                  }
                 }
               }
           }
         }`;
-export const EDIT_NOTE = gql`
-mutation UpdateNote($id: ID!, $content: String!){
-  updateNote(id: $id, content: $content){
-    id
-    createdAt
-    updatedAt
-    content
-    favoriteCount
-    author {
-      id
-      username
-      avatar
-      email
-      favorites{
-        id
-      }
-    }
-  }
-}`;
-export const DELETE_NOTE = gql`
-mutation DeleteNote($id: ID!){
-  deleteNote(id: $id)
-}`;
-export const TOGGLE_FAVORITE = gql`
-mutation ToggleFavorite($id: ID!){
-  toggleFavorite(id: $id){
-    id
-    content
-    favoriteCount
-    author{
-      id
-      username
-    }
-  }
-}`;

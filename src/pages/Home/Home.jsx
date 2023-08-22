@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from '../components/Button';
-import NoteFeed from '../components/notes/NoteFeed';
+import Button from '../../components/general/Button';
+import NoteFeed from '../../components/notes/NoteFeed';
 
 const Home = ({ notes, hasNextPage, refetch, cursor }) => {
   return (
