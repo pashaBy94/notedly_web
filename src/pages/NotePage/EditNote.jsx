@@ -22,7 +22,7 @@ const EditNote = ({ setIsEdit, content, editNote, id }) => {
       {(formik) => (
         <form
           onSubmit={formik.handleSubmit}
-          className="flex flex-col content-center lg:px-6"
+          className="flex flex-col content-center lg:px-6 pl-4"
         >
           <textarea
             className="outline-sky-400 border-2 border-sky-200 mb-5 py-3 px-2 text-[20px] rounded-2xl min-h-[150px]"

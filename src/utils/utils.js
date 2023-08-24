@@ -1,0 +1,1 @@
+export const scrollToMyRef = (parentScroll) => {parentScroll.scrollTo(0, 0)}

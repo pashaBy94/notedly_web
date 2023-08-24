@@ -2,25 +2,37 @@ import { useMutation } from '@apollo/client';
 import React from 'react';
 import { DELETE_NOTE } from '../../utils/mutation';
 import { GET_MY_NOTES, GET_NOTES } from '../../utils/query';
+import { IconContext } from 'react-icons';
+import { TiDeleteOutline } from 'react-icons/ti';
 
 const DeleteNote = ({ id }) => {
   let [deleteNote] = useMutation(DELETE_NOTE, {
-    refetchQueries: [{query: GET_NOTES}, {query: GET_MY_NOTES}],
+    refetchQueries: [{ query: GET_NOTES }, { query: GET_MY_NOTES }],
     onError: (err) => {
       console.log(err);
     },
   });
   return (
-    <button
-      onClick={(e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        deleteNote({ variables: { id } });
-      }}
-      className="block p-4 border-none rounded-md text-lg text-white bg-sky-500 cursor-pointer hover:opacity-80 active:bg-sky-800"
-    >
-      X
-    </button>
+    <div>
+      <button
+      className=' absolute top-[90%] hover:animate-wiggle'
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          deleteNote({ variables: { id } });
+        }}
+      >
+        <IconContext.Provider
+          value={{
+            color: '#EF4444',
+            className: 'global-class-name',
+            size: '2em',
+          }}
+        >
+          <TiDeleteOutline />
+        </IconContext.Provider>
+      </button>
+    </div>
   );
 };
 export default DeleteNote;

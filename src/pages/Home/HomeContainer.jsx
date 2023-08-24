@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { GET_NOTES } from '../../utils/query';
 import Preloader from '../../components/general/Preloader';
 
-const HomeContainer = () => {
+const HomeContainer = ({scroll, parentScroll}) => {
   let { loading, error, data, refetch } = useQuery(GET_NOTES);
   useEffect(() => {
     document.title = 'Homes';
@@ -20,6 +20,8 @@ const HomeContainer = () => {
         <Home
           notes={data.noteFeed.notes}
           refetch={refetch}
+          parentScroll={parentScroll}
+          scroll={scroll}
           cursor={data.noteFeed.cursor}
           hasNextPage={data.noteFeed.hasNextPage}
         />
@@ -27,8 +29,10 @@ const HomeContainer = () => {
         <Home
           notes={[]}
           refetch={refetch}
+          parentScroll={parentScroll}
           cursor={''}
           hasNextPage={false}
+          scroll={scroll}
         />
       )}
     </>

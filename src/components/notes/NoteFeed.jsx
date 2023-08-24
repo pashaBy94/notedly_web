@@ -1,4 +1,5 @@
 import React from 'react';
+import { memo } from 'react';
 import Note from './Note';
 
 const NoteFeed = ({ notes }) => {
@@ -12,4 +13,4 @@ const NoteFeed = ({ notes }) => {
     </ul>
   );
 };
-export default NoteFeed;
+export default memo(NoteFeed);

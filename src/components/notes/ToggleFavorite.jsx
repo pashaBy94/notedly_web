@@ -1,29 +1,39 @@
 import { useMutation } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import { TOGGLE_FAVORITE } from '../../utils/mutation';
-import { GET_MY_FAVORITES_NOTE, GET_MY_NOTES, GET_NOTES } from '../../utils/query';
+import {
+  GET_MY_FAVORITES_NOTE,
+  GET_MY_NOTES,
+  GET_NOTES,
+} from '../../utils/query';
+import { IconContext } from 'react-icons';
+import { AiFillStar } from 'react-icons/ai';
 
 const ToggleFavorite = ({ id, count, favoritedBy }) => {
-    const [hase, setHase] = useState(false);
-    useEffect(()=>{
-      let me_id = localStorage.getItem('me_id');
-      console.log(me_id);
-        if(favoritedBy.length > 0){
-            let a = 0;
-            favoritedBy.forEach(us=>{
-                if(us.id === me_id) {
-                    a++;
-                    return
-                }
-            });
-            if(a>0) setHase(true);
-            else setHase(false);
-        } else{
-          setHase(false);
+  const [hase, setHase] = useState(false);
+  const [star, setStar] = useState(false);
+  useEffect(() => {
+    let me_id = localStorage.getItem('me_id');
+    if (favoritedBy.length > 0) {
+      let a = 0;
+      favoritedBy.forEach((us) => {
+        if (us.id === me_id) {
+          a++;
+          return;
         }
-    })
+      });
+      if (a > 0) setHase(true);
+      else setHase(false);
+    } else {
+      setHase(false);
+    }
+  });
   let [toggleFavorite, {}] = useMutation(TOGGLE_FAVORITE, {
-    refetchQueries: [{query: GET_MY_FAVORITES_NOTE}, {query: GET_MY_NOTES}, {query: GET_NOTES}],
+    refetchQueries: [
+      { query: GET_MY_FAVORITES_NOTE },
+      { query: GET_MY_NOTES },
+      { query: GET_NOTES },
+    ],
     onError: (err) => {
       console.log(err);
     },
@@ -31,17 +41,45 @@ const ToggleFavorite = ({ id, count, favoritedBy }) => {
   return (
     <div>
       <button
+        className=" relative rounded-full hover:shadow-[0_0_4px_0_rgba(226,183,10,0.45)]"
         onClick={(ev) => {
           ev.preventDefault();
-          toggleFavorite({variables:{id}});
+          setStar(true);
+          setTimeout(()=>{
+            setStar(false);
+          },1000);
+          toggleFavorite({ variables: { id } });
         }}
-      >{!hase?"Add to favorites": "Remove to favorites"}
-      </button>
-        <span role="img" className="mr-2 p-1 bg-slate-200">
-          &#128077;
+      >
+        {!hase ? (
+          <div className={`${star?'animate-wiggle':''}`}>
+            <IconContext.Provider
+              value={{
+                color: '#D3CFBE',
+                className: 'global-class-name',
+                size: '2em',
+              }}
+            >
+              <AiFillStar />
+            </IconContext.Provider>
+          </div>
+        ) : (
+          <div className={`${star?'animate-wiggle':''}`}>
+            <IconContext.Provider
+              value={{
+                color: '#F5CA1B',
+                className: 'global-class-name',
+                size: '2em',
+              }}
+            >
+              <AiFillStar />
+            </IconContext.Provider>
+          </div>
+        )}
+        <span className=" absolute right-[-5px] bottom-[-5px] rounded-full bg-sky-500 p-1 w-5 h-5 leading-[10px] text-[10px] font-bold">
+          {count}
         </span>
-      {' '}
-      <strong>{count}</strong>
+      </button>
     </div>
   );
 };

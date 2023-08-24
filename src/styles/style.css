@@ -6,6 +6,9 @@
     body, html {
         @apply h-full m-0;
     }
+    html, .scrollToBe{
+        scroll-behavior: smooth;
+    }
     body {
         font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; 
         @apply bg-white leading-snug;
@@ -22,4 +25,13 @@
     pre {
         max-width: 100%;
     }
+    .truncate-text {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        line-height: 1.1em;
+        height: 3.9em;
+      }
+
 }
