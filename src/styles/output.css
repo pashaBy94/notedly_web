@@ -579,6 +579,10 @@ code,
   margin: 0px;
 }
 
+.m-3 {
+  margin: 0.75rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -649,12 +653,12 @@ code,
   height: 100%;
 }
 
-.h-11 {
-  height: 2.75rem;
-}
-
 .min-h-\[150px\] {
   min-height: 150px;
+}
+
+.w-16 {
+  width: 4rem;
 }
 
 .w-32 {
@@ -663,14 +667,6 @@ code,
 
 .w-full {
   width: 100%;
-}
-
-.w-11 {
-  width: 2.75rem;
-}
-
-.w-16 {
-  width: 4rem;
 }
 
 .max-w-\[800px\] {

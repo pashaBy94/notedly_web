@@ -8,7 +8,7 @@ loadDevMessages();
 loadErrorMessages();
 const App = () => {
     let api_url = process.env.API_URI;
-    const httpLink = createHttpLink({ uri: api_url });
+    const httpLink = createHttpLink({ uri: 'https://jslistnote-367662497dfd.herokuapp.com/api' });//sss
     const cache = new InMemoryCache();
     const authLink = setContext((_, { headers }) => {
         return {
