@@ -8,7 +8,7 @@ loadDevMessages();
 loadErrorMessages();
 const App = () => {
     let api_url = process.env.API_URI;
-    const httpLink = createHttpLink({ uri: api_url });//sss
+    const httpLink = createHttpLink({ uri: api_url });
     const cache = new InMemoryCache();
     const authLink = setContext((_, { headers }) => {
         return {

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { IconContext } from 'react-icons';
 import { MdMenu } from 'react-icons/md';
 import { BiHomeAlt } from 'react-icons/bi';
 import { AiOutlineStar } from 'react-icons/ai';
 import { MdSpeakerNotes } from 'react-icons/md';
+import ReactIcons from '../hoc/ReactIcons';
 
 const Navigation = () => {
   const [open, setOpen] = useState(false);
@@ -24,15 +24,12 @@ const Navigation = () => {
             className="no-underline font-bold text-1.1em flex text-[#333] visited:text-[#333] hover:text-sky-500 focus:text-sky-500 "
           >
             <div className="mr-2">
-              <IconContext.Provider
-                value={{
-                  color: '#0EA5E9',
-                  className: 'global-class-name',
-                  size: '2em',
-                }}
-              >
-                <BiHomeAlt />
-              </IconContext.Provider>
+              <ReactIcons
+                element={BiHomeAlt}
+                col="#0EA5E9"
+                cl="global-class-name"
+                sz="2em"
+              />
             </div>
             <span>Home</span>
           </Link>
@@ -40,15 +37,12 @@ const Navigation = () => {
         <li className="border-b-2 border-dotted border-[#333] last:border-b-0 py-2 transition ease-in-out delay-150 duration-300 hover:bg-[rgba(207,233,245,0.25)]">
           <Link to={'/favorites'} className={var_li}>
             <div className="mr-2">
-              <IconContext.Provider
-                value={{
-                  color: '#0EA5E9',
-                  className: 'global-class-name',
-                  size: '2em',
-                }}
-              >
-                <AiOutlineStar />
-              </IconContext.Provider>
+              <ReactIcons
+                element={AiOutlineStar}
+                col="#0EA5E9"
+                cl="global-class-name"
+                sz="2em"
+              />
             </div>
             <span>Favorites</span>
           </Link>
@@ -56,15 +50,12 @@ const Navigation = () => {
         <li className="border-b-2 border-dotted border-[#333] last:border-b-0 py-2 transition ease-in-out delay-150 duration-300 hover:bg-[rgba(207,233,245,0.25)]">
           <Link to={'/mynotes'} className={var_li}>
             <div className="mr-2">
-              <IconContext.Provider
-                value={{
-                  color: '#0EA5E9',
-                  className: 'global-class-name',
-                  size: '2em',
-                }}
-              >
-                <MdSpeakerNotes />
-              </IconContext.Provider>
+              <ReactIcons
+                element={MdSpeakerNotes}
+                col="#0EA5E9"
+                cl="global-class-name"
+                sz="2em"
+              />
             </div>
             <span>My notes</span>
           </Link>
@@ -76,15 +67,12 @@ const Navigation = () => {
           open ? 'hidden' : 'block'
         } sw:hidden cursor-pointer border-b-2 border-dotted border-[#333] last:border-b-0 py-2 transition ease-in-out delay-150 duration-300 hover:bg-[rgba(207,233,245,0.25)]`}
       >
-        <IconContext.Provider
-          value={{
-            color: '#0EA5E9',
-            className: 'global-class-name',
-            size: '2em',
-          }}
-        >
-          <MdMenu />
-        </IconContext.Provider>
+        <ReactIcons
+          element={MdMenu}
+          col="#0EA5E9"
+          cl="global-class-name"
+          sz="2em"
+        />
       </div>
     </nav>
   );

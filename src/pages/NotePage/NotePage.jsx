@@ -1,18 +1,17 @@
 import { format } from 'date-fns';
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Sugar } from 'react-preloaders';
 import Button from '../../components/general/Button';
 import EditNote from './EditNote';
-import { IconContext } from 'react-icons';
 import { BiMessage } from 'react-icons/bi';
 import { AiFillStar } from 'react-icons/ai';
+import Preloader from 'react-preloaders/lib/Preloader';
+import ReactIcons from '../../hoc/ReactIcons';
 const NotePage = ({ data, isMy, editNote }) => {
   const [isEdit, setIsEdit] = useState(false);
-  if (!data) return <Sugar color={'rgb(14 165 233)'} />;
+  if (!data) return <Preloader />;
   let dateCreate = format(new Date(data.note.createdAt), 'd MMM yyyy');
   let dateUpdate = format(new Date(data.note.updatedAt), 'd MMM yyyy');
-  console.log(data);
   return (
     <div className="">
       <h2 className=" text-[24px] font-bold pb-3">
@@ -34,29 +33,23 @@ const NotePage = ({ data, isMy, editNote }) => {
           </p>
         </div>
         <div className=" vm:hidden">
-          <IconContext.Provider
-            value={{
-              color: '#0EA5E9',
-              className: 'global-class-name',
-              size: '4em',
-            }}
-          >
-            <BiMessage />
-          </IconContext.Provider>
+          <ReactIcons
+            element={BiMessage}
+            col="#0EA5E9"
+            cl="global-class-name"
+            sz="4em"
+          />
         </div>
       </div>
-      <div className='flex justify-between items-center mb-5'>
+      <div className="flex justify-between items-center mb-5">
         <h3 className="text-[20px] pl-4 font-bold">Content:</h3>
-        <div className='relative'>
-          <IconContext.Provider
-            value={{
-              color: '#F5CA1B',
-              className: 'global-class-name',
-              size: '4em',
-            }}
-          >
-            <AiFillStar />
-          </IconContext.Provider>
+        <div className="relative">
+          <ReactIcons
+            element={AiFillStar}
+            col="#F5CA1B"
+            cl="global-class-name"
+            sz="4em"
+          />
           <span className=" absolute right-0 bottom-0 rounded-full bg-sky-500 p-2 w-6 h-6 leading-[10px] text-[10px] font-bold">
             {data.note.favoriteCount}
           </span>

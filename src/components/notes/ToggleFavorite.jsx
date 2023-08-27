@@ -6,8 +6,8 @@ import {
   GET_MY_NOTES,
   GET_NOTES,
 } from '../../utils/query';
-import { IconContext } from 'react-icons';
 import { AiFillStar } from 'react-icons/ai';
+import ReactIcons from '../../hoc/ReactIcons';
 
 const ToggleFavorite = ({ id, count, favoritedBy }) => {
   const [hase, setHase] = useState(false);
@@ -45,35 +45,29 @@ const ToggleFavorite = ({ id, count, favoritedBy }) => {
         onClick={(ev) => {
           ev.preventDefault();
           setStar(true);
-          setTimeout(()=>{
+          setTimeout(() => {
             setStar(false);
-          },1000);
+          }, 1000);
           toggleFavorite({ variables: { id } });
         }}
       >
         {!hase ? (
-          <div className={`${star?'animate-wiggle':''}`}>
-            <IconContext.Provider
-              value={{
-                color: '#D3CFBE',
-                className: 'global-class-name',
-                size: '2em',
-              }}
-            >
-              <AiFillStar />
-            </IconContext.Provider>
+          <div className={`${star ? 'animate-wiggle' : ''}`}>
+            <ReactIcons
+              element={AiFillStar}
+              col="#D3CFBE"
+              cl="global-class-name"
+              sz="2em"
+            />
           </div>
         ) : (
-          <div className={`${star?'animate-wiggle':''}`}>
-            <IconContext.Provider
-              value={{
-                color: '#F5CA1B',
-                className: 'global-class-name',
-                size: '2em',
-              }}
-            >
-              <AiFillStar />
-            </IconContext.Provider>
+          <div className={`${star ? 'animate-wiggle' : ''}`}>
+            <ReactIcons
+              element={AiFillStar}
+              col="#F5CA1B"
+              cl="global-class-name"
+              sz="2em"
+            />
           </div>
         )}
         <span className=" absolute right-[-5px] bottom-[-5px] rounded-full bg-sky-500 p-1 w-5 h-5 leading-[10px] text-[10px] font-bold">
